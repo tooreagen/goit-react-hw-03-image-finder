@@ -10,7 +10,7 @@ export class App extends Component {
   render() {
     return (
       <Layout>
-        <h1>Testing</h1>
+        <h1>Testing1</h1>
         <h2>Applications</h2>
 
         <GlobalStyle />
