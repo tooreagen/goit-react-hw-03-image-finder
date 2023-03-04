@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Layout } from './Layout';
 import { GlobalStyle } from './GlobalStyle';
+import { Searchbar } from './Searchbar/Searchbar';
 
 export class App extends Component {
   state = {
@@ -10,8 +11,7 @@ export class App extends Component {
   render() {
     return (
       <Layout>
-        <h1>Testing1</h1>
-        <h2>Applications</h2>
+        <Searchbar />
 
         <GlobalStyle />
       </Layout>
