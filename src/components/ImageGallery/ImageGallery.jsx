@@ -5,7 +5,6 @@ import { ImageGalleryList } from './ImageGallery.styled';
 
 export class ImageGallery extends Component {
   render() {
-    console.log(this.props.imagesList);
     return (
       <ImageGalleryList>
         {this.props.imagesList.map(item => {

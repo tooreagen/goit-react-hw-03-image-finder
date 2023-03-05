@@ -16,11 +16,12 @@ export class App extends Component {
       const imagesObject = await getImages(queryString);
       const imagesObjectFiltered = [];
       imagesObject.map(item => {
+        return (
         imagesObjectFiltered.push({
           id: item.id,
           webformatURL: item.webformatURL,
           largeImageURL: item.largeImageURL,
-        });
+        }));
       });
       this.setState({ images: imagesObjectFiltered });
 
