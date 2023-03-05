@@ -3,9 +3,10 @@ import { Layout } from './Layout';
 import { GlobalStyle } from './GlobalStyle';
 import { Searchbar } from './Searchbar/Searchbar';
 import { getImages } from 'API/PixabayAPI';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 export class App extends Component {
-  state = {};
+  state = { images: [] };
 
   handleSubmit = async evt => {
     evt.preventDefault();
@@ -20,8 +21,8 @@ export class App extends Component {
           webformatURL: item.webformatURL,
           largeImageURL: item.largeImageURL,
         });
-      })
-      this.setState(imagesObjectFiltered);
+      });
+      this.setState({ images: imagesObjectFiltered });
 
       // this.setState({ articles });
     } catch (error) {
@@ -35,6 +36,7 @@ export class App extends Component {
     return (
       <Layout>
         <Searchbar handleSubmit={this.handleSubmit} />
+        <ImageGallery imagesList={this.state.images} />
 
         <GlobalStyle />
       </Layout>
