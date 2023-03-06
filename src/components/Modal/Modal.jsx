@@ -27,7 +27,7 @@ export class Modal extends Component {
 
   render() {
     return createPortal(
-      <Overlay onClick={this.props.onModalClose}>
+      <Overlay onClick={this.handleOverlayClick}>
         <ModalImg>
           <img src={this.props.imageURL} alt={this.props.imageTags} />
         </ModalImg>
