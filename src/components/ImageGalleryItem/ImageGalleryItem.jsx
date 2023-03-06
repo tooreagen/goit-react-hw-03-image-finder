@@ -7,8 +7,11 @@ import {
 export class ImageGalleryItem extends Component {
   render() {
     return (
-      <ImageGalleryListItem>
-        <ImageGalleryItemImage src={this.props.webformatURL} alt="" />
+      <ImageGalleryListItem onClick={this.props.onClick}>
+        <ImageGalleryItemImage
+          src={this.props.webformatURL}
+          alt={this.props.tags}
+        />
       </ImageGalleryListItem>
     );
   }

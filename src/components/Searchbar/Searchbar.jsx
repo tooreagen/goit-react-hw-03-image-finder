@@ -7,6 +7,7 @@ import {
   SearchFormButtonLabel,
   SearchFormInput,
 } from './Searchbar.styled';
+import { ReactComponent as SearchIcon } from "../../icons/search.svg";
 
 export class Searchbar extends Component {
   render() {
@@ -14,6 +15,7 @@ export class Searchbar extends Component {
       <SearchbarHeader>
         <SearchForm onSubmit={this.props.handleSubmit}>
           <SearchFormButton type="submit">
+            <SearchIcon width={32} height={32} />
             <SearchFormButtonLabel>Search</SearchFormButtonLabel>
           </SearchFormButton>
 

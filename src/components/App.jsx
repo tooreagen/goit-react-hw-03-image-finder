@@ -8,7 +8,12 @@ import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 
 export class App extends Component {
-  state = { images: [], queryString: '', page: 1, isLoading: false };
+  state = {
+    images: [],
+    queryString: '',
+    page: 1,
+    isLoading: false,
+  };
 
   handleSubmit = evt => {
     evt.preventDefault();
@@ -41,6 +46,7 @@ export class App extends Component {
             id: item.id,
             webformatURL: item.webformatURL,
             largeImageURL: item.largeImageURL,
+            tags: item.tags,
           });
         });
 
@@ -60,9 +66,13 @@ export class App extends Component {
       <Layout>
         <Searchbar handleSubmit={this.handleSubmit} />
         {this.state.error && (
-          <p>What is happening here anyway? Error: {this.state.error.message}</p>
+          <p>
+            What is happening here anyway? Error: {this.state.error.message}
+          </p>
         )}
+
         <ImageGallery imagesList={this.state.images} />
+
         {this.state.images.length !== 0 && (
           <Button handleLoadMore={this.handleLoadMore} />
         )}
@@ -77,3 +87,8 @@ export class App extends Component {
 //Якщо запит пустий - повідомлення
 //Якщо запит є, скіко всього їх там?
 //Скоротити оті макаронні вироби
+//Перевіряти чи пусте поле пошуку?
+//Ыконка на кнопі пошуку
+//В методе handleSubmit() можно добавить валидацию входных данных перед отправкой запроса, например, проверить, что строка поиска не пуста.
+
+//В методе render() можно добавить условие, чтобы кнопка "Загрузить еще" не отображалась, если все изображения были загружены.
