@@ -23,6 +23,7 @@ export class App extends Component {
     const queryString = evt.currentTarget.elements.search.value;
     if (!queryString) {
       toast('Enter search text');
+      return;
     }
       this.setState({
         images: [],
