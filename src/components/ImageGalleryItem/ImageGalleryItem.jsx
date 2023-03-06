@@ -3,6 +3,7 @@ import {
   ImageGalleryListItem,
   ImageGalleryItemImage,
 } from './ImageGalleryItem.styled';
+import PropTypes from 'prop-types';
 
 export class ImageGalleryItem extends Component {
   render() {
@@ -16,3 +17,9 @@ export class ImageGalleryItem extends Component {
     );
   }
 }
+
+ImageGalleryItem.propTypes = {
+  webformatURL: PropTypes.string.isRequired,
+  tags: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+};

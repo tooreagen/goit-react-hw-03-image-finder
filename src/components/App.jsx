@@ -6,6 +6,9 @@ import { getImages } from 'API/PixabayAPI';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export class App extends Component {
   state = {
@@ -18,12 +21,15 @@ export class App extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     const queryString = evt.currentTarget.elements.search.value;
-    this.setState({
-      images: [],
-      queryString: queryString,
-      page: 1,
-      error: null,
-    });
+    if (!queryString) {
+      toast('Enter search text');
+    }
+      this.setState({
+        images: [],
+        queryString: queryString,
+        page: 1,
+        error: null,
+      });
   };
 
   handleLoadMore = () => {
@@ -49,7 +55,6 @@ export class App extends Component {
             tags: item.tags,
           });
         });
-
         this.setState(prevState => ({
           images: [...prevState.images, ...imagesObjectFiltered],
         }));
@@ -78,17 +83,20 @@ export class App extends Component {
         )}
 
         {this.state.isLoading && <Loader />}
+        <ToastContainer
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <GlobalStyle />
       </Layout>
     );
   }
 }
-
-//Якщо запит пустий - повідомлення
-//Якщо запит є, скіко всього їх там?
-//Скоротити оті макаронні вироби
-//Перевіряти чи пусте поле пошуку?
-//Ыконка на кнопі пошуку
-//В методе handleSubmit() можно добавить валидацию входных данных перед отправкой запроса, например, проверить, что строка поиска не пуста.
-
-//В методе render() можно добавить условие, чтобы кнопка "Загрузить еще" не отображалась, если все изображения были загружены.
