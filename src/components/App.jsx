@@ -9,13 +9,14 @@ import { Loader } from './Loader/Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 export class App extends Component {
   state = {
     images: [],
     queryString: '',
     page: 1,
     isLoading: false,
+    error: null,
+    totalHits: 0,
   };
 
   handleSubmit = evt => {
@@ -25,12 +26,13 @@ export class App extends Component {
       toast('Enter search text');
       return;
     }
+    if (this.state.queryString !== queryString) {
       this.setState({
         images: [],
         queryString: queryString,
         page: 1,
-        error: null,
       });
+    }
   };
 
   handleLoadMore = () => {
@@ -48,7 +50,8 @@ export class App extends Component {
         const queryString = this.state.queryString;
         const imagesObject = await getImages(queryString, page);
         const imagesObjectFiltered = [];
-        imagesObject.map(item => {
+
+        imagesObject.hits.map(item => {
           return imagesObjectFiltered.push({
             id: item.id,
             webformatURL: item.webformatURL,
@@ -56,8 +59,10 @@ export class App extends Component {
             tags: item.tags,
           });
         });
+
         this.setState(prevState => ({
           images: [...prevState.images, ...imagesObjectFiltered],
+          totalHits: imagesObject.totalHits,
         }));
       } catch (error) {
         this.setState({ error });
@@ -79,9 +84,11 @@ export class App extends Component {
 
         <ImageGallery imagesList={this.state.images} />
 
-        {this.state.images.length !== 0 && (
-          <Button handleLoadMore={this.handleLoadMore} />
-        )}
+        {this.state.images.length !== 0 &&
+          this.state.totalHits &&
+          this.state.images.length < this.state.totalHits && (
+            <Button handleLoadMore={this.handleLoadMore} />
+          )}
 
         {this.state.isLoading && <Loader />}
         <ToastContainer
